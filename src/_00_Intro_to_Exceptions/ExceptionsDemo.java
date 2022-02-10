@@ -1,5 +1,7 @@
 package _00_Intro_to_Exceptions;
 
+import javax.swing.JOptionPane;
+
 public class ExceptionsDemo {
 
     /*
@@ -39,10 +41,16 @@ public class ExceptionsDemo {
     public static void main(String[] args) {
 
         // 1. Create a try/catch block (Hint: type "try" and ctrl + space).
+    	NegativeNumberException nne = new NegativeNumberException();
     	try {
+			nne.testPositive(-111);
 			testFiveOrGreater(4);
+		} catch (NegativeNumberException e) {
+			e.scaryPopup();
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			JOptionPane.showMessageDialog(null, "Your computer is actually safe!");
 		}
         /*
          * 2. Call the testFiveOrGreater method with a value less than 5 inside
@@ -105,6 +113,14 @@ public class ExceptionsDemo {
      */
 }
 
-class NegativeNumberException extends Exception() {
+class NegativeNumberException extends Exception {
+	public void scaryPopup() {
+		JOptionPane.showMessageDialog(null, "You have triggered a critical error on your computer.");
+	}
 	
+	public static void testPositive(int i) throws NegativeNumberException {
+		if (i < 0) {
+			throw new NegativeNumberException();
+		}
+	}
 }

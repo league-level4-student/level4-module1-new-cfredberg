@@ -50,3 +50,33 @@ public abstract class AbstractClassDemo {
  * 1. Create a class that extends the AbstractClassDemo class and implement its
  * methods.
  */
+
+class run extends AbstractClassDemo implements InterfaceDemo, DemoInterface{
+
+	@Override
+	public void abstractDemo() {
+		// TODO Auto-generated method stub
+		demo();
+		
+	}
+
+	@Override
+	public int abstractNumDemo() {
+		// TODO Auto-generated method stub
+		return 52;
+	}
+
+	@Override
+	public double interDemo() {
+		// TODO Auto-generated method stub
+		return (1111+2-64/5+6/2+3/4)/999;
+	}
+
+	@Override
+	public String faceDemo() {
+		// TODO Auto-generated method stub
+		return "Hello World!";
+	}
+	
+	
+}
