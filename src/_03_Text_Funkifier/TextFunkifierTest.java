@@ -44,6 +44,7 @@ public class TextFunkifierTest {
 
     @Test
     public void testCustomString() {
-
+    	MixedUpWord muw = new MixedUpWord("Xavier, Bruno, and Sally went home.");
+    	assertEquals("*@v;er, Brun0, @nd $@lly went #0me.", muw.funkifyText());
     }
 }
