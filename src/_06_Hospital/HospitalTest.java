@@ -71,7 +71,7 @@ public class HospitalTest extends TestCase {
 
     // When you check a patient's pulse, they feel cared for
     public void testCheckPulse() throws Exception {
-        Patient testPatient = new Patient();
+        testPatient = new Patient();
         //Note: Getters for booleans generally use "is" instead of "get"
         assertEquals(false, testPatient.isFeelsCaredFor());
         testPatient.checkPulse();

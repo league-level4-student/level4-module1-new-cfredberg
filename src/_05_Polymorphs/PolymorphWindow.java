@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 import java.util.Random;
@@ -64,32 +65,35 @@ public class PolymorphWindow extends JPanel implements ActionListener {
     private Timer timer;
 
     ArrayList<Polymorph> list = new ArrayList<Polymorph>();
-    Polymorph move;
 
     public static void main(String[] args) {
         new PolymorphWindow().buildWindow();
     }
 
     public void buildWindow() {
-    	move = new MouseMorph(0, 0);
     	
-        window = new JFrame("IT'S MORPHIN' TIME!");
-        window.add(this);
-        window.getContentPane().setPreferredSize(new Dimension(500, 500));
-        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.addMouseMotionListener((MouseMotionListener) move);
-        window.pack();
-        window.setVisible(true);
-
-        for (int i = 0; i < 12; i++) {
+    	for (int i = 0; i < 14; i++) {
         	if (i < 4) {
         		list.add(new BluePolymorph(new Random().nextInt(400), new Random().nextInt(400)));
         	}else if (i > 3 && i < 8) {
         		list.add(new RedPolymorph(new Random().nextInt(400), new Random().nextInt(400)));
+        	}else if (i == 12){
+        		list.add(new MouseMorph(0, 0));
+        	}else if (i == 13){
+        		list.add(new ClickyMorph(50, 50));
         	}else {
         		list.add(new MovingMorph(new Random().nextInt(200), new Random().nextInt(400)));
         	}
         }
+    	
+    	window = new JFrame("IT'S MORPHIN' TIME!");
+        window.add(this);
+        window.getContentPane().setPreferredSize(new Dimension(500, 500));
+        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        window.addMouseMotionListener((MouseMotionListener) list.get(12));
+        window.addMouseListener((MouseListener) list.get(13));
+        window.pack();
+        window.setVisible(true);
 
         timer = new Timer(1000 / 30, this);
         timer.start();
@@ -101,18 +105,16 @@ public class PolymorphWindow extends JPanel implements ActionListener {
         g.fillRect(0, 0, 500, 500);
 
         // draw polymorph
-        for (int i = 0; i < 12; i++) {
+        for (int i = 0; i < list.size(); i++) {
         	list.get(i).draw(g);
         }
-        move.draw(g);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         repaint();
-        for (int i = 0; i < 12; i++) {
+        for (int i = 0; i < list.size(); i++) {
         	list.get(i).update();
         }
-        move.update();
     }
 }
