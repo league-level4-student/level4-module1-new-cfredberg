@@ -7,4 +7,9 @@ public class Surgeon extends Doctor {
 		return true;
 	}
 
+	public boolean getMakesHouseCalls() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }
